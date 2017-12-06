@@ -1,12 +1,12 @@
 {
   "name": "ginger-king-boats",
   "version": "1.0.0",
-  "description": "server side implementation for Infosys UI-Angular Training final project",
+  "description": "server side implementation from training",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Shivam Rawal, Nishma Khan, Peter Vue, Venkata Kapuganti, Pranav Chary",
+  "author": "Peter Vue",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
