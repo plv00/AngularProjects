@@ -1,3 +1,28 @@
-<p>
-  display-all-bookings works!
-</p>
+<div class="container-fluid text-center">
+   <h1>GINGER KING BOATS</h1>
+
+   <div class="col-md-8 col-md-offset-2 bordering fade-in">
+       <a [routerLink]="['/search-and-book']"><label class="btn addNew">New Booking</label></a>
+       <div class="scrollbar">
+           <h3>Click on a Transaction ID to View and Edit Details</h3>
+
+           <table class="table">
+               <tr >
+                   <th class="text-center">Transaction ID</th>
+                   <th class="text-center">User ID</th>
+                   <th class="text-center">Boat ID</th>
+                   <th class="text-center">Total Fares</th>
+                   <th></th>
+               </tr>
+               <tr *ngFor="let data of allBookingData">
+                   <td><a [routerLink]="['/display-selected-boat', data.txnId]">{{data.txnId}}</a></td>
+                   <td>{{data.userId}}</td>
+                   <td>{{data.boatId}}</td>
+                   <td>{{data.totalCost}}</td>
+                   <td><button type="Submit" class="btn btn-danger" (click)="deleteBookingDetails(data.txnId)" value="data.txnId">Delete Booking</button></td>
+               </tr>
+           </table>
+       </div>
+   </div>
+
+</div>

@@ -1,3 +1,40 @@
-<p>
-  search-and-book works!
-</p>
+<div class = "text-center">
+  <h1>GINGER KING BOATS</h1>
+  <div class = "col-md-6 col-md-offset-3 text-center bordering">
+    <h3>Explore Boats in the USA</h3>
+    <form [formGroup] = "bookGroup">
+      <div class = "form-group">
+        <label>Select Boat Type:</label><br>
+        <select formControlName = "boatType" class = "form-control" (click) = "boatChange()"><br>
+          <option value ="">--Select--</option>
+          <option [selected] = "boatType" [hidden] = "boatType == undefined || boatType == ''"> {{ boatType}} </option>
+          <option value = "Houseboat" * ngIf = "boatType != 'Houseboat'">Houseboat</option>
+          <option value = "Cruiser" * ngIf = "boatType != 'Cruiser">Cruiser</option>
+          <option value = "Bass Boat" * ngIf = "boatType != 'Bass Boat'">Bass Boat</option>
+          <option value = "Speed Boat" * ngIf = "boatType != 'Speed Boat'">Speed Boat</option>
+          <option value = "Power Catamaran" * ngIf = "boatType != 'Power Catamaran'">Power Catamaran</option>
+        </select>
+        <div class = "text-danger" *ngIf = "!bookGroup.controls.boatType.valid">
+          Please select a Boat.
+        </div>
+      </div>
+
+      <div class = "form-group">
+        <label>Select Location: </label><br>
+        <select formControlName = "location" class = "form-control"><br>
+          <option value = "">--Select--</option>
+          <option *ngFor = "let data of locations" [hidden] = "locations == 'Boat type incorrect'" [value] = "data.location">{{ data.location }} </option>
+        </select>
+        <div class = "text-danger" *ngIf = "!bookGroup.controls.location.valid">
+          Please select a Location.
+        </div>
+        <div class = "form-group">
+          <button [disabled] = "!bookGroup.valid" class = "btn btn-primary" 
+          [routerLink] ="['/confirm-booking', bookGroup.value.boatType, bookGroup.value.location]">Search Now</button><br><br>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</div>

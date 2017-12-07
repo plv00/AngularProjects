@@ -1,3 +1,82 @@
-<p>
-  confirm-booking works!
-</p>
+<div class="text-center">
+   <h1>GINGER KING BOATS</h1>
+   <div class="col-md-10 col-md-offset-1 bordering" *ngIf="bookNow == false">
+       <h3>Explore Boats in the U.S.A.</h3>
+       <table class="table">
+           <tr>
+               <td colspan="5" class="text-center">
+                    Showing all the <b>{{boatType}}s</b> available in <b>{{location}}</b>
+               </td>
+           </tr>
+           <tr>
+               <th class="text-center">Description</th>
+               <th class="text-center">Base Price</th>
+               <th class="text-center">Allowed Days</th>
+               <th class="text-center">Booking Start Date</th>
+               <th></th>               
+           </tr>
+           <tr *ngFor="let info of boatInfo">
+               <td>{{info.description}}</td>
+               <td>{{info.basePrice | currency: 'USD' : true}}</td>
+               <td>{{info.allowedDays}}</td>
+               <td>{{info.bookingStart | slice : 0 : 10}}</td>
+               <td><button class="btn btn-primary" (click)="bookNowValue(info.boatId)" >Confirm</button></td>
+           </tr>
+       </table>
+       <button class="btn btn-danger center-block"[routerLink]="['/search-and-book', boatType]"s>Back to Search</button>
+   </div>
+        
+   <div class="col-md-6 col-md-offset-3 bordering" *ngIf="bookNow == true">
+       <h3>Please Enter the Appropriate Details Below</h3>
+       <b>Booking {{boatType}} in {{location}}</b><hr>
+       <form [formGroup]="confirmBook">
+           <table class="table enter-details">
+               <tr>
+                   <td class="text-center"><label>Selected Boat ID:</label></td>
+                   <td class="text-center"><label>{{bookedBoat.boatId}}</label></td>
+               </tr>
+               <tr>              
+                   <td class="text-center"><label>Discount Applicable:</label></td>
+                   <td class="text-center"><label>{{bookedBoat.discount | percent}}</label></td>
+               </tr>
+               <tr>
+                   <td class="text-center"><label>Your User ID:</label></td>
+                   <td class="text-center"><input class="form-control" type="number" min="1000" max="9999" formControlName="userId">
+                       <label class="text-danger" *ngIf="(!confirmBook.controls.userId.valid || confirmBook.controls.userId.hasError('min') || confirmBook.controls.userId.hasError('max')) && confirmBook.controls.userId.dirty">
+                            Please select a Boat.
+                       </label>
+                   </td>                
+               </tr>
+               <tr>
+                   <td class="text-center"><label>Booking Start Date:</label></td>
+                   <td class="text-center"><input class="form-control" type="date" formControlName="startDate" [min]="today">
+                       <label class="text-danger" *ngIf="!confirmBook.controls.startDate.valid && confirmBook.controls.startDate.dirty">
+                            Please enter a valid starting date.
+                       </label>
+                   </td>                
+               </tr>
+               <tr>
+                   <td class="text-center"><label>Booking End Date:</label></td>
+                   <td class="text-center"><input class="form-control" type="date" formControlName="endDate" [min]="confirmBook.controls.startDate.value">
+                       <label class="text-danger" *ngIf="!confirmBook.controls.endDate.valid && confirmBook.controls.endDate.dirty">
+                            Please enter a valid ending date.
+                       </label>
+                   </td>                
+               </tr>
+               <tr>
+                   <td class="text-center"><label>Mobile No:</label></td>
+                   <td class="text-center"><input class="form-control" type="number" min="1000000000" max="9999999999" formControlName="mobileNo"></td>                
+               </tr>
+               <tr>
+                   <td colspan="5"><button [disabled]="this.confirmBook.invalid" class="btn btn-primary center-block" (click)="bookBoat()" >Book Now</button></td>
+               </tr>
+           </table>
+       </form>
+       <label class="text-danger" *ngIf="errorBool" >
+            {{errorMessage}}
+       </label>
+       <label class="text-success" *ngIf="successBool" >
+            {{successMessage}}
+       </label>
+   </div>
+</div>

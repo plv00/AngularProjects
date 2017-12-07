@@ -1,0 +1,8 @@
+ select {
+    border-radius: 15px;
+    color: #07507F;
+}
+.btn {
+    border-radius: 25px;
+    border: 0;
+}
