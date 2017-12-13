@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\CookingApp",
+    "\\CookingApp\\src",
+    "\\CookingApp\\src\\app",
+    "\\CookingApp\\src\\app\\header",
+    "\\CookingApp\\src\\app\\recipes",
+    "\\CookingApp\\src\\app\\recipes\\recipe-list",
+    "\\CookingApp\\src\\app\\shopping-list"
+  ],
+  "SelectedNode": "\\CookingApp\\src\\app\\recipes\\recipe-list\\recipe-list.component.html",
+  "PreviewInSolutionExplorer": false
+}
